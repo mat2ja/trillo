@@ -9,7 +9,11 @@
   --color-grey-dark-1: #333;
   --color-grey-dark-2: #777;
   --color-grey-dark-3: #999;
-  --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, .3); }
+  --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, .3);
+  --icon-dimension-small: 1.75rem;
+  --icon-dimension-medium: 2rem;
+  --icon-dimension-large: 2.25rem;
+  --font-size: 1.6rem; }
 
 * {
   margin: 0;
@@ -25,7 +29,7 @@ html {
   font-size: 62.5%; }
 
 body {
-  font-size: 1.6rem;
+  font-size: var(--font-size);
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   line-height: 1.6;
@@ -51,13 +55,10 @@ body {
     border: none;
     padding: 0.7rem 2rem;
     padding-right: 3.75rem;
-    /* text won't overlay the button */
     border-radius: 100rem;
     width: 90%;
-    /* so that it can grow on hover */
     transition: all 0.2s;
-    margin-right: -3.25rem;
-    /* shifts the entire space left, as opposed to position:relative which would shift only the content, leaving the empty space on the rigth */ }
+    margin-right: -3.25rem; }
     .search__input:focus {
       outline: none;
       width: 100%;
@@ -68,7 +69,6 @@ body {
   .search__button {
     border: none;
     background-color: transparent;
-    /* my implementation which is cleary superior */
     cursor: pointer;
     transition: transform 0.2s; }
     .search__button:focus {
@@ -76,20 +76,18 @@ body {
     .search__button:active {
       transform: scale(0.95); }
   .search__icon {
-    height: 2rem;
-    width: 2rem;
+    width: var(--icon-dimension-medium);
+    height: var(--icon-dimension-medium);
     fill: var(--color-grey-dark-3); }
 
 .user-nav {
   align-self: stretch;
-  /* fills the entir height of the container, overwriting the align-items:center */
   display: flex;
   align-items: center; }
   .user-nav > * {
     padding: 0 2rem;
     cursor: pointer;
     height: 100%;
-    /* make each child fill the entire height -> hover background-color can now fill the entire height */
     display: flex;
     align-items: center; }
     .user-nav > *:hover {
@@ -97,13 +95,13 @@ body {
   .user-nav__icon-box {
     position: relative; }
   .user-nav__icon {
-    height: 2.25rem;
-    width: 2.25rem;
+    width: var(--icon-dimension-large);
+    height: var(--icon-dimension-large);
     fill: var(--color-grey-dark-2); }
   .user-nav__notification {
     font-size: 0.8rem;
-    height: 1.75rem;
-    width: 1.75rem;
+    width: var(--icon-dimension-small);
+    height: var(--icon-dimension-small);
     border-radius: 50%;
     background-color: var(--color-primary);
     color: white;
@@ -139,9 +137,7 @@ body {
     background-color: var(--color-primary);
     transform: scaleY(0);
     transform-origin: center;
-    /* default value */
-    transition: transform 200ms, width 400ms 200ms cubic-bezier(1, 0, 0, 1), background-color 100ms;
-    /* we want width animation to start immediately after transform is done, thus delay=200ms */ }
+    transition: transform 200ms, width 400ms 200ms cubic-bezier(1, 0, 0, 1), background-color 100ms; }
   .side-nav__item:hover::before, .side-nav__item--active::before {
     transform: scaleY(1);
     width: 100%; }
@@ -156,12 +152,10 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    /* z-index wont work without it */
-    z-index: 10;
-    /* only works if we have specified positon */ }
+    z-index: 10; }
   .side-nav__icon {
-    height: 1.75rem;
-    width: 1.75rem;
+    width: var(--icon-dimension-small);
+    height: var(--icon-dimension-small);
     margin-right: 2rem;
     fill: currentColor; }
 
@@ -170,6 +164,79 @@ body {
   text-align: center;
   padding: 2.5rem;
   color: var(--color-grey-light-4); }
+
+.gallery {
+  display: flex; }
+  .gallery__photo {
+    width: 100%;
+    display: block; }
+
+.overview {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-grey-light-2); }
+  .overview__heading {
+    text-transform: uppercase;
+    font-size: 2.25rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem; }
+  .overview__stars {
+    margin-right: auto;
+    display: flex; }
+  .overview__icon--star, .overview__icon--location {
+    width: var(--icon-dimension-small);
+    height: var(--icon-dimension-small);
+    fill: var(--color-primary); }
+  .overview__location {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center; }
+  .overview__icon--location {
+    margin-right: 0.5rem; }
+  .overview__rating {
+    background-color: var(--color-primary);
+    color: white;
+    margin-left: 3rem;
+    padding: 0 2.25rem;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+  .overview__rating-average {
+    font-size: 2.25rem;
+    font-weight: 300;
+    margin: -.3rem; }
+  .overview__rating-count {
+    font-size: 0.8rem;
+    text-transform: uppercase; }
+
+.btn-inline {
+  border: none;
+  font-size: inherit;
+  color: var(--color-primary);
+  border-bottom: 1px solid currentColor;
+  background-color: transparent;
+  padding: 0.2rem;
+  cursor: pointer;
+  transition: all 200ms; }
+  .btn-inline:hover {
+    color: var(--color-grey-dark-1); }
+  .btn-inline:focus {
+    outline: none;
+    animation: pulsate 1s infinite; }
+
+@keyframes pulsate {
+  from {
+    transform: scale(1);
+    box-shadow: none; }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25); }
+  to {
+    transform: scale(1);
+    box-shadow: none; } }
 
 .container {
   max-width: 120rem;
@@ -182,7 +249,7 @@ body {
   font-size: 1.5rem;
   height: 7rem;
   background-color: white;
-  border-bottom: var(--color-grey-light-2);
+  border-bottom: 1px solid var(--color-grey-light-2);
   display: flex;
   justify-content: space-between;
   align-items: center; }
@@ -199,7 +266,5 @@ body {
 
 .hotel-view {
   background-color: white;
-  background-color: salmon;
   flex: 1;
-  /* take all the available space */
   height: 80rem; }
