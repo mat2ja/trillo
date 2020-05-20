@@ -232,7 +232,7 @@
 	display: flex;
 	align-items: center;
 
-	border-bottom: 1px solid var(--color-grey-light-2);
+	border-bottom: var(--line);
 
 	&__heading {
 		text-transform: uppercase;
@@ -281,7 +281,7 @@
 	&__rating-average {
 		font-size: 2.25rem;
 		font-weight: 300;
-		margin: -.3rem;
+		margin: -0.3rem;
 	}
 
 	&__rating-count {
@@ -329,5 +329,91 @@
 	to {
 		transform: scale(1);
 		box-shadow: none;
+	}
+}
+
+//*
+//* PARAGRAPH
+//*
+// .paragraph:not(:last-of-type) {
+// 	margin-bottom: 2rem; //TODO cant get it to work
+// }
+
+.paragraph:first-of-type {
+	margin-bottom: 2rem; // workaround till I solve the problem above
+}
+
+//*
+//* LIST
+//*
+
+.list {
+	list-style: none;
+	margin: 3rem 0;
+	padding: 3rem 0;
+	border-top: var(--line);
+	border-bottom: var(--line);
+
+	display: flex;
+	flex-wrap: wrap;
+
+	&__item {
+		flex: 0 0 50%;
+		margin-bottom: 0.7rem; // margins will collapse for the last items
+
+		&::before {
+			//content: url("../img/chevron-thin-right.svg"); // my try at the possible approach
+			content: "";
+			display: inline-block;
+			height: 1rem;
+			width: 1rem;
+			margin-right: 0.7rem;
+
+			// Older browsers
+			// background-image: url(../img/chevron-thin-right.svg);
+			// background-size: cover;
+
+			// Never browsers - masks
+			background-color: var(--color-primary);
+			-webkit-mask-image: url(../img/chevron-thin-right.svg);
+			-webkit-mask-size: cover; // fit entire image
+			mask-image: url(../img/chevron-thin-right.svg);
+			mask-size: cover;
+		}
+	}
+}
+
+//*
+//* RECOMMEND
+//*
+
+.recommend {
+	font-size: 1.3rem;
+	color: var(--color-grey-dark-3);
+
+	display: flex;
+	align-items: center;
+
+	&__count {
+		margin-right: auto; // same thing as justify-content: space-between;, so don't know why we used exactly this
+	}
+
+	&__friends {
+		display: flex; 
+		// centers the photos, needed because there was some whitespace at the bottom
+		// also makes them all always in one row, instead of pushing photos in the next row on smaller screen sites
+	}
+
+	&__photo {
+		box-sizing: content-box; // Add the border on top of the image dimensions
+		// beacuse the added border shrank the image
+		height: 4rem;
+		width: 4rem;
+		border-radius: 50%;
+		border: 3px solid white;
+
+		&:not(:last-child) {
+			margin-right: -1.5rem;
+		}
 	}
 }
