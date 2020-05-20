@@ -51,11 +51,13 @@ body {
     border: none;
     padding: 0.7rem 2rem;
     padding-right: 3.75rem;
-    /* so that the text won't overlay the button */
+    /* text won't overlay the button */
     border-radius: 100rem;
     width: 90%;
+    /* so that it can grow on hover */
     transition: all 0.2s;
-    margin-right: -3.25rem; }
+    margin-right: -3.25rem;
+    /* shifts the entire space left, as opposed to position:relative which would shift only the content, leaving the empty space on the rigth */ }
     .search__input:focus {
       outline: none;
       width: 100%;
@@ -66,11 +68,13 @@ body {
   .search__button {
     border: none;
     background-color: transparent;
-    /* my implementation which is cleary superior */ }
+    /* my implementation which is cleary superior */
+    cursor: pointer;
+    transition: transform 0.2s; }
     .search__button:focus {
       outline: none; }
     .search__button:active {
-      transform: translateY(2px); }
+      transform: scale(0.95); }
   .search__icon {
     height: 2rem;
     width: 2rem;
@@ -117,6 +121,56 @@ body {
     height: 3.75rem;
     margin-right: 1rem; }
 
+.side-nav {
+  font-size: 1.4rem;
+  list-style: none;
+  margin-top: 3.5rem; }
+  .side-nav__item {
+    position: relative; }
+    .side-nav__item:not(:last-child) {
+      margin-bottom: 0.5rem; }
+  .side-nav__item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--color-primary);
+    transform: scaleY(0);
+    transform-origin: center;
+    /* default value */
+    transition: transform 200ms, width 400ms 200ms cubic-bezier(1, 0, 0, 1), background-color 100ms;
+    /* we want width animation to start immediately after transform is done, thus delay=200ms */ }
+  .side-nav__item:hover::before, .side-nav__item--active::before {
+    transform: scaleY(1);
+    width: 100%; }
+  .side-nav__item:active::before {
+    background-color: var(--color-primary-light); }
+  .side-nav__link:link, .side-nav__link:visited {
+    color: var(--color-grey-light-1);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* z-index wont work without it */
+    z-index: 10;
+    /* only works if we have specified positon */ }
+  .side-nav__icon {
+    height: 1.75rem;
+    width: 1.75rem;
+    margin-right: 2rem;
+    fill: currentColor; }
+
+.legal {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--color-grey-light-4); }
+
 .container {
   max-width: 120rem;
   margin: 8rem auto;
@@ -138,10 +192,14 @@ body {
 
 .sidebar {
   background-color: var(--color-grey-dark-1);
-  flex: 0 0 18%; }
+  flex: 0 0 18%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
 
 .hotel-view {
   background-color: white;
   background-color: salmon;
   flex: 1;
-  /* take all the available space */ }
+  /* take all the available space */
+  height: 80rem; }
