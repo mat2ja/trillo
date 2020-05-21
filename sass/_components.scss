@@ -489,5 +489,96 @@
 		color: var(--color-grey-light-2);
 		z-index: 1;
 	}
+}
 
+//*
+//* CALL-TO-ACTION
+//*
+
+.cta {
+	padding: 3.5rem 0;
+	text-align: center;
+
+	&__book-now {
+		font-size: 2rem;
+		font-weight: 300;
+		text-transform: uppercase;
+		margin-bottom: 2.5rem;
+	}
+}
+
+//*
+//* CTA
+//*
+
+.btn {
+	font-size: 1.5rem;
+	font-weight: 300;
+	text-transform: uppercase;
+
+	border-radius: 100rem;
+	border: none;
+	background: var(--color-primary)
+		linear-gradient(
+			to right,
+			var(--color-primary-light),
+			var(--color-primary-dark)
+		);
+	color: white;
+
+	position: relative;
+	overflow: hidden; // hides the text when it is outside the button
+	cursor: pointer;
+
+	> * {
+		display: inline-block;
+		width: 100%;
+		height: 100%; // same dimensions as its parent element
+		transition: all 200ms;
+	}
+
+	/* 
+	as I figured, only one of span can have position: absolute:
+	- if both are taken out of the flow, button wont be visible
+	- if neither is absolute (i.e both use transform: translateY, so both are in the flow), button would have to hold both spans at once, and bcs they both have dimensions of 100%, button would be huge
+
+	Basically, one of the spans MUST be taken out of the flow
+	*/
+
+	&--visible {
+		padding: 2rem 7.5rem;
+	}
+
+	&--invisible {
+		padding: 2rem 0; // aligns the text vertically, and it's identical to visible button text padding
+		// transform: translateY(-100%); // example of why it wont work
+
+		position: absolute;
+		left: 0;
+		top: -100%; // move it completely outside the button by its complete height, height must be defined
+	}
+
+	&:hover {
+		background: var(--color-primary)
+			linear-gradient(
+				to left,
+				var(--color-primary-light),
+				var(--color-primary-dark)
+			);
+	}
+
+	&:hover &--visible {
+		transform: translateY(100%); // height must be defined for it to work
+		bottom: -100%;
+	}
+
+	&:hover &--invisible {
+		//top: 0;
+		transform: translateY(100%); // my implementation, transition should be smoother
+	}
+
+	&:focus {
+		outline: none;
+		animation: pulsate 1s infinite;
+	}
 }

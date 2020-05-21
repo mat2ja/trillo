@@ -22,7 +22,6 @@
 	--icon-dimension-medium: 2rem;
 	--icon-dimension-large: 2.25rem;
 
-	--font-size: 1.6rem;
 }
 
 * {
@@ -42,7 +41,7 @@ html {
 }
 
 body {
-	font-size: var(--font-size);
+	font-size: 1.6rem;
 	font-family: "Open Sans", sans-serif;
 	font-weight: 400;
     line-height: 1.6;
