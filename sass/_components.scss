@@ -304,9 +304,18 @@
 	cursor: pointer;
 	transition: all 200ms;
 
+	span {
+		margin-left: 3px;
+		transition: margin-left 200ms;
+	}
+
 	&:hover {
 		color: var(--color-grey-dark-1);
 		// border automatically updates to matches the new text color, beacause of defined currentColor
+
+		span {
+			margin-left: 8px;
+		}
 	}
 
 	&:focus {
@@ -335,12 +344,8 @@
 //*
 //* PARAGRAPH
 //*
-// .paragraph:not(:last-of-type) {
-// 	margin-bottom: 2rem; //TODO cant get it to work
-// }
-
-.paragraph:first-of-type {
-	margin-bottom: 2rem; // workaround till I solve the problem above
+.paragraph:not(:last-of-type) {
+	margin-bottom: 2rem;
 }
 
 //*
@@ -399,7 +404,7 @@
 	}
 
 	&__friends {
-		display: flex; 
+		display: flex;
 		// centers the photos, needed because there was some whitespace at the bottom
 		// also makes them all always in one row, instead of pushing photos in the next row on smaller screen sites
 	}
@@ -416,4 +421,73 @@
 			margin-right: -1.5rem;
 		}
 	}
+}
+
+//*
+//* REVIEWS
+//*
+
+.review {
+	background-color: white;
+	box-shadow: var(--shadow-light);
+	padding: 3rem;
+	margin-bottom: 3.5rem;
+	position: relative;
+	overflow: hidden; // to hide quotation marks overflowing out of the box
+
+	&__text {
+		margin-bottom: 2rem;
+		z-index: 10;
+		position: relative; // requirement for z-index to work
+	}
+
+	&__user {
+		display: flex;
+		align-items: center;
+	}
+
+	&__photo {
+		height: 4.5rem;
+		width: 4.5rem;
+		border-radius: 50%;
+		margin-right: 1.5rem;
+	}
+
+	&__user-box {
+		margin-right: auto;
+	}
+
+	&__user-name {
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-transform: uppercase;
+
+		margin-bottom: 0.4rem;
+	}
+
+	&__user-date {
+		font-size: 1rem;
+		color: var(--color-grey-dark-3);
+	}
+
+	&__rating {
+		font-size: 2.2rem;
+
+		color: var(--color-primary);
+	}
+
+	&::before {
+		content: "\201C"; // left double quotation mark
+		position: absolute;
+		top: -2.75rem;
+		left: -1rem;
+		// border: 1px solid salmon;
+		line-height: 1;
+		font-size: 22rem;
+		font-family: sans-serif;
+
+		color: var(--color-grey-light-2);
+		z-index: 1;
+	}
+
 }

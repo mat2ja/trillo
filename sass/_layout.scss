@@ -3,8 +3,6 @@
 	margin: 8rem auto;
 	background-color: var(--color-grey-light-2);
 	box-shadow: var(--shadow-dark);
-
-	min-height: 50rem;
 }
 
 .header {
@@ -26,19 +24,15 @@
 	background-color: var(--color-grey-dark-1);
 
 	flex: 0 0 18%;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 }
 
 .hotel-view {
 	background-color: white;
 	flex: 1; // take all the available space
-
 }
 
 .detail {
+	font-size: 1.4rem;
 	display: flex;
 	padding: 4.5rem; // matches the margin between boxes
 	background-color: var(--color-grey-light-1);
@@ -46,16 +40,22 @@
 }
 
 .description {
-	font-size: 1.4rem;
 	background-color: white;
 	box-shadow: var(--shadow-light);
 
 	flex: 0 0 60%; // when we set flex-basis with %, we usually want to set grow and shrink to 0
 	margin-right: 4.5rem;
 	padding: 3rem;
+
+	display: flex;
+	flex-direction: column;
 }
 
 .user-reviews {
-	background-color: yellowgreen;
 	flex: 1;
+
+	// we use flex to center the button (btn-inline)
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
