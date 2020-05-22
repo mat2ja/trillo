@@ -3,6 +3,12 @@
 	margin: 8rem auto;
 	background-color: var(--color-grey-light-2);
 	box-shadow: var(--shadow-dark);
+
+	@media only screen and (max-width: $bp-largest) {
+		margin: 0;
+		max-width: 100%; // override max-width:120rem
+		width: 100%;
+	}
 }
 
 .header {
@@ -14,10 +20,20 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	@media only screen and (max-width: $bp-smallest) {
+		flex-wrap: wrap;
+		align-content: space-around; // spacing between two flex rows
+		height: 11rem;
+	}
 }
 
 .content {
 	display: flex;
+	
+	@media only screen and (max-width: $bp-medium) {
+		flex-direction: column;
+	}
 }
 
 .sidebar {
@@ -35,11 +51,20 @@
 }
 
 .detail {
-	font-size: 1.4rem;
 	display: flex;
+
+	font-size: 1.4rem;
 	padding: 4.5rem; // matches the margin between boxes
 	background-color: var(--color-grey-light-1);
 	border-bottom: var(--line);
+
+	@media only screen and (max-width: $bp-medium) {
+		padding: 2.75rem;
+	}
+
+	@media only screen and (max-width: $bp-small) {
+		flex-direction: column;
+	}
 }
 
 .description {
@@ -47,11 +72,18 @@
 	box-shadow: var(--shadow-light);
 
 	flex: 0 0 60%; // when we set flex-basis with %, we usually want to set grow and shrink to 0
-	margin-right: 4.5rem;
+	margin-right: 4.5rem; // match .detail padding
 	padding: 3rem;
 
-	display: flex;
-	flex-direction: column;
+	@media only screen and (max-width: $bp-medium) {
+		padding: 2rem;
+		margin-right: 2.75rem; // match .detail padding
+	}
+
+	@media only screen and (max-width: $bp-small) {
+		margin-right: 0;
+		margin-bottom: 2.75rem; // match .detail padding
+	}
 }
 
 .user-reviews {

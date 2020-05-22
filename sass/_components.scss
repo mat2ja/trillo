@@ -18,6 +18,14 @@
 	align-items: center;
 	justify-content: center;
 
+	@media only screen and (max-width: $bp-smallest) {
+		order: 1;
+		flex: 100%;
+		margin-left: 1rem; //
+		margin-right: 2.75rem; // bigger size od the left one, because the whole input is moved to right bcs of negative margins, trial and error
+		margin-bottom: 0.5rem;
+	}
+
 	&__input {
 		font-family: inherit;
 		font-size: inherit;
@@ -30,7 +38,7 @@
 		border-radius: 100rem;
 		width: 90%; // so that it can grow on hover
 		transition: all 0.2s;
-		margin-right: -3.25rem; // shifts the entire space left, as opposed to position:relative which would shift only the content, leaving the empty space on the rigth
+		margin-right: -3.5rem; // shifts the entire space left, as opposed to position:relative which would shift only the content, leaving the empty space on the rigth
 
 		&:focus {
 			outline: none;
@@ -49,6 +57,8 @@
 		background-color: transparent; // my implementation which is cleary superior
 		cursor: pointer;
 		transition: transform 0.2s;
+		position: relative;
+		top: 1px;
 
 		&:focus {
 			outline: none;
@@ -95,6 +105,10 @@
 		position: relative;
 	}
 
+	&__icon-box:hover &__notification {
+		background-color: var(--color-primary-light);
+	}
+
 	&__icon {
 		width: var(--icon-dimension-large);
 		height: var(--icon-dimension-large);
@@ -111,22 +125,31 @@
 		color: white;
 
 		position: absolute;
-		top: 1.5rem;
+		top: 1.6rem;
 		right: 1.1rem;
 
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		transition: all 100ms;
+
+		@media only screen and (max-width: $bp-smallest) {
+			top: 0;
+		}
 	}
 
 	&__user {
 		display: flex;
 		align-items: center;
+
+		&:hover &-name {
+			color: var(--color-primary);
+		}
 	}
 
 	&__user-photo {
 		border-radius: 50%;
-		height: 3.75rem;
+		height: 4rem;
 		margin-right: 1rem;
 	}
 }
@@ -138,14 +161,30 @@
 .side-nav {
 	font-size: 1.4rem;
 	list-style: none;
-
 	margin-top: 3.5rem;
+
+	@media only screen and (max-width: $bp-medium) {
+		margin: 0;
+		display: flex;
+	}
 
 	&__item {
 		position: relative;
 
 		&:not(:last-child) {
 			margin-bottom: 0.5rem;
+
+			@media only screen and (max-width: $bp-medium) {
+				margin-bottom: 0;
+			}
+		}
+
+		@media only screen and (max-width: $bp-medium) {
+			flex: 1; // ocupy the extra space, basically 25% each item
+
+			&:not(:last-child) {
+				margin-bottom: 0;
+			}
 		}
 	}
 
@@ -156,7 +195,6 @@
 		left: 0;
 		height: 100%;
 		width: 3px;
-
 		background-color: var(--color-primary);
 
 		transform: scaleY(0);
@@ -183,20 +221,35 @@
 
 		display: block;
 		padding: 1.5rem 3rem;
+		position: relative; // z-index wont work without it
+		z-index: 10; // only works if we have specified positon
 
 		display: flex;
 		align-items: center;
 
-		position: relative; // z-index wont work without it
-		z-index: 10; // only works if we have specified positon
+		@media only screen and (max-width: $bp-medium) {
+			padding: 2rem;
+			justify-content: center;
+		}
+
+		@media only screen and (max-width: $bp-small) {
+			padding: 1.5rem 0.2rem;
+			flex-direction: column;
+		}
 	}
 
 	&__icon {
 		width: var(--icon-dimension-small);
 		height: var(--icon-dimension-small);
 		margin-right: 2rem;
-
 		fill: currentColor;
+
+		@media only screen and (max-width: $bp-small) {
+			width: var(--icon-dimension-xs);
+			height: var(--icon-dimension-xs);
+			margin-right: 0;
+			margin-bottom: 0.75rem;
+		}
 	}
 }
 
@@ -209,6 +262,10 @@
 	text-align: center;
 	padding: 2.5rem;
 	color: var(--color-grey-light-4);
+
+	@media only screen and (max-width: $bp-medium) {
+		display: none;
+	}
 }
 
 //*
@@ -234,18 +291,39 @@
 
 	border-bottom: var(--line);
 
+	@media only screen and (max-width: $bp-smallest) {
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
 	&__heading {
 		text-transform: uppercase;
 		font-size: 2.25rem;
 		font-weight: 300;
 		letter-spacing: 1px;
 		padding: 1.5rem 3rem;
+		padding-right: 2rem;
+
+		@media only screen and (max-width: $bp-smallest) {
+			flex: 100%;
+			text-align: center;
+			padding-bottom: 0;
+			font-size: 2.5rem;
+		}
 	}
 
 	&__stars {
-		// flex: 1;
 		margin-right: auto; //* AMAZING TRICK, right margin occupies the entire available space */
 		display: flex; // fixes the icon--star not being perfectly vertically centered; it removes the extra whitespace on the bottom that the inline property of the svg produces
+
+		@media only screen and (max-width: $bp-smallest) {
+			flex: 1;
+			margin: 1.5rem 1rem 1.5rem 3rem;
+		}
+	}
+
+	&__icon--star:hover {
+		transform: scale(1.3) rotate(20deg);
 	}
 
 	&__icon--star,
@@ -253,12 +331,26 @@
 		width: var(--icon-dimension-small);
 		height: var(--icon-dimension-small);
 		fill: var(--color-primary);
+		transition: transform 200ms;
+
+		@media only screen and (max-width: $bp-smallest) {
+			width: var(--icon-dimension-medium);
+			height: var(--icon-dimension-medium);
+		}
 	}
 
 	&__location {
 		font-size: 1.2rem;
 		display: flex;
 		align-items: center;
+
+		@media only screen and (max-width: $bp-smallest) {
+			margin: 1.5rem 1.5rem;
+		}
+	}
+
+	&__location:hover &__icon--location {
+		transform: scale(1.3);
 	}
 
 	&__icon--location {
@@ -277,16 +369,38 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
+		@media only screen and (max-width: $bp-small) {
+			margin-left: auto;
+		}
 	}
+
 	&__rating-average {
 		font-size: 2.25rem;
 		font-weight: 300;
 		margin: -0.3rem;
+
+		@media only screen and (max-width: $bp-small) {
+			font-size: 2rem;
+		}
+
+		@media only screen and (max-width: $bp-smallest) {
+			font-size: 2.5rem;
+		}
 	}
 
 	&__rating-count {
 		font-size: 0.8rem;
 		text-transform: uppercase;
+
+		@media only screen and (max-width: $bp-small) {
+			font-size: 0.5rem;
+			text-align: center;
+		}
+
+		@media only screen and (max-width: $bp-smallest) {
+			// display: none;
+		}
 	}
 }
 
@@ -301,6 +415,7 @@
 	border-bottom: 1px solid currentColor; // always match the text color
 	background-color: transparent;
 	padding: 0.2rem;
+
 	cursor: pointer;
 	transition: all 200ms;
 
@@ -344,8 +459,8 @@
 //*
 //* PARAGRAPH
 //*
-.paragraph:not(:last-of-type) {
-	margin-bottom: 2rem;
+.paragraph {
+	margin-bottom: 2rem; // margin of 2nd paragraph collapses with the list margin
 }
 
 //*
@@ -362,9 +477,17 @@
 	display: flex;
 	flex-wrap: wrap;
 
+	@media only screen and (max-width: $bp-small) {
+		justify-content: space-around;
+	}
+
 	&__item {
 		flex: 0 0 50%;
 		margin-bottom: 0.7rem; // margins will collapse for the last items
+
+		@media only screen and (max-width: $bp-small) {
+			flex: 0 0 45%;
+		}
 
 		&::before {
 			//content: url("../img/chevron-thin-right.svg"); // my try at the possible approach
@@ -375,15 +498,18 @@
 			margin-right: 0.7rem;
 
 			// Older browsers
-			// background-image: url(../img/chevron-thin-right.svg);
-			// background-size: cover;
+			background-image: url(../img/chevron-thin-right.svg);
+			background-size: cover;
 
 			// Never browsers - masks
-			background-color: var(--color-primary);
-			-webkit-mask-image: url(../img/chevron-thin-right.svg);
-			-webkit-mask-size: cover; // fit entire image
-			mask-image: url(../img/chevron-thin-right.svg);
-			mask-size: cover;
+			@supports (-webkit-mask-image: url()) or (mask-image: url()) {
+				background: var(--color-primary); // must be either shorthand or background-image:none, to remove property for older browsers
+				-webkit-mask-image: url(../img/chevron-thin-right.svg);
+				-webkit-mask-size: cover; // fit entire image
+				mask-image: url(../img/chevron-thin-right.svg);
+				mask-size: cover;
+				// masks give us ability to change color, so older browsers will have the icon without our primary color
+			}
 		}
 	}
 }
@@ -407,6 +533,7 @@
 		display: flex;
 		// centers the photos, needed because there was some whitespace at the bottom
 		// also makes them all always in one row, instead of pushing photos in the next row on smaller screen sites
+		margin-left: 1rem;
 	}
 
 	&__photo {
@@ -416,9 +543,16 @@
 		width: 4rem;
 		border-radius: 50%;
 		border: 3px solid white;
+		transition: all 200ms;
 
 		&:not(:last-child) {
-			margin-right: -1.5rem;
+			margin-right: -1.75rem;
+		}
+
+		&:hover {
+			position: relative;
+			z-index: 1;
+			transform: scale(1.1) rotate(5deg);
 		}
 	}
 }
@@ -434,6 +568,12 @@
 	margin-bottom: 3.5rem;
 	position: relative;
 	overflow: hidden; // to hide quotation marks overflowing out of the box
+	width: 100%; // fixes the uneven width on smaller screens when text isnt long enough, overides max-content
+
+	@media only screen and (max-width: $bp-medium) {
+		padding: 2rem;
+		margin-bottom: 2.75rem;
+	}
 
 	&__text {
 		margin-bottom: 2rem;
@@ -496,8 +636,12 @@
 //*
 
 .cta {
-	padding: 3.5rem 0;
+	padding: 3.5rem 2rem;
 	text-align: center;
+
+	@media only screen and (max-width: $bp-medium) {
+		padding: 3.5rem 2rem;
+	}
 
 	&__book-now {
 		font-size: 2rem;
@@ -574,7 +718,9 @@
 
 	&:hover &--invisible {
 		//top: 0;
-		transform: translateY(100%); // my implementation, transition should be smoother
+		transform: translateY(
+			100%
+		); // my implementation, transition should be smoother
 	}
 
 	&:focus {
