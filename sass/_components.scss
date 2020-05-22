@@ -98,6 +98,10 @@
 
 		&:hover {
 			background-color: var(--color-grey-light-2);
+
+			@media (hover: none) {
+				background-color: none;
+			}
 		}
 	}
 
@@ -357,25 +361,17 @@
 
 	&__icon--star,
 	&__icon--location {
-		width: var(--icon-dimension-small);
-		height: var(--icon-dimension-small);
+		width: var(--icon-dimension-medium);
+		height: var(--icon-dimension-medium);
 		fill: var(--color-primary);
 		transition: transform 200ms;
-
-		@media only screen and (max-width: $bp-smallest) {
-			width: var(--icon-dimension-medium);
-			height: var(--icon-dimension-medium);
-		}
 	}
 
 	&__location {
-		font-size: 1.2rem;
+		font-size: 1.3rem;
 		display: flex;
 		align-items: center;
-
-		@media only screen and (max-width: $bp-smallest) {
-			margin: 1.5rem 1.5rem;
-		}
+		margin: 0 2.5rem;
 	}
 
 	&__location:hover &__icon--location {
@@ -405,25 +401,22 @@
 	}
 
 	&__rating-average {
-		font-size: 2.25rem;
+		font-size: 2.8rem;
 		font-weight: 300;
-		margin: -0.3rem;
+		margin: -0.2rem;
 
 		@media only screen and (max-width: $bp-smallest) {
-			font-size: 2.5rem;
+			font-size: 2.8rem;
 		}
 	}
 
 	&__rating-count {
 		font-size: 0.8rem;
 		text-transform: uppercase;
-
-		@media only screen and (max-width: $bp-small) {
-			text-align: center;
-		}
+		text-align: center;
 
 		@media only screen and (max-width: $bp-smallest) {
-			// display: none;
+			display: none;
 		}
 	}
 }
