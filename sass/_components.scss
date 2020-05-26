@@ -145,9 +145,10 @@
 	&__user {
 		display: flex;
 		align-items: center;
+		position: relative;
 
 		&:hover &-name {
-			color: var(--color-primary);
+			// color: var(--color-primary);
 		}
 	}
 
@@ -155,6 +156,63 @@
 		border-radius: 50%;
 		height: 4rem;
 		margin-right: 1rem;
+	}
+
+	&__user:hover &__dropdown {
+		opacity: 1;
+		// transform: scale(1) translateY(0);
+		transform: translateX(0);
+	}
+
+	&__user:hover &__dropdown-link {
+		opacity: 1;
+		// transition: opacity 150ms 300ms;
+	}
+
+	&__dropdown {
+		// transform: scale(1, 0) translateY(-1em);
+		transform: translateX(100%);
+		opacity: 0;
+
+		position: absolute;
+		top: 100%;
+		right: -1px;
+		background-color: var(--color-grey-light-1);
+		z-index: 20;
+
+		box-shadow: var(--shadow-dark);
+
+		transition: all 400ms ease-in-out;
+		// transform-origin: top;
+	}
+
+	&__dropdown-item {
+		list-style: none;
+	}
+
+	&__dropdown-link {
+		opacity: 0;
+
+		text-decoration: none;
+		color: inherit;
+		display: block;
+		text-align: center;
+		padding: 0.4em 3em;
+
+		transition: opacity 150ms;
+
+		&:hover {
+			color: black;
+			background-color: var(--color-grey-light-2);
+		}
+	}
+
+	//TODO cant get svgs to work
+	&__dropdown-icon {
+		display: none;
+		width: var(--icon-dimension-large);
+		height: var(--icon-dimension-large);
+		fill: var(--color-grey-dark-2);
 	}
 }
 
@@ -299,12 +357,13 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%) scale(0);
 		transition: all 400ms;
 	}
 
 	&__item:hover &__caption {
 		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
 	}
 
 	&__photo {

@@ -9,6 +9,8 @@
 		max-width: 100%; // override max-width:120rem
 		width: 100%;
 	}
+
+	overflow: hidden; // hides the shadow on hover of my user-nav menu
 }
 
 .header {
@@ -30,7 +32,7 @@
 
 .content {
 	display: flex;
-	
+
 	@media only screen and (max-width: $bp-medium) {
 		flex-direction: column;
 	}

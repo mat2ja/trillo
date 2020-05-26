@@ -143,13 +143,46 @@ img {
         top: 0; } }
   .user-nav__user {
     display: flex;
-    align-items: center; }
-    .user-nav__user:hover .user-nav__user-name {
-      color: var(--color-primary); }
+    align-items: center;
+    position: relative; }
   .user-nav__user-photo {
     border-radius: 50%;
     height: 4rem;
     margin-right: 1rem; }
+  .user-nav__user:hover .user-nav__dropdown {
+    opacity: 1;
+    transform: scale(1); }
+  .user-nav__user:hover .user-nav__dropdown-link {
+    opacity: 1;
+    transition: opacity 150ms 300ms; }
+  .user-nav__dropdown {
+    transform: scale(1, 0);
+    position: absolute;
+    top: 100%;
+    right: 0em;
+    background-color: var(--color-grey-light-1);
+    z-index: 20;
+    box-shadow: var(--shadow-dark);
+    transition: transform 300ms ease-in-out;
+    transform-origin: top; }
+  .user-nav__dropdown-item {
+    list-style: none; }
+  .user-nav__dropdown-link {
+    opacity: 0;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    text-align: center;
+    padding: 0.4em 3em;
+    transition: opacity 150ms; }
+    .user-nav__dropdown-link:hover {
+      color: black;
+      background-color: var(--color-grey-light-2); }
+  .user-nav__dropdown-icon {
+    display: none;
+    width: var(--icon-dimension-large);
+    height: var(--icon-dimension-large);
+    fill: var(--color-grey-dark-2); }
 
 .side-nav {
   font-size: 1.4rem;
@@ -243,10 +276,11 @@ img {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
     transition: all 400ms; }
   .gallery__item:hover .gallery__caption {
-    opacity: 1; }
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); }
   .gallery__photo {
     width: 100%;
     display: block;
