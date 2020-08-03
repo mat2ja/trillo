@@ -3,6 +3,8 @@ Second project of [Advanced CSS and Sass Udemy course](https://www.udemy.com/cou
 
 Built entirely with Flexbox
 
+<img src='img/screenshot.png'>
+
 ### [Live Demo](https://mat2ja.github.io/trillo/)
 
 
